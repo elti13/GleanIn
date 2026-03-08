@@ -315,19 +315,7 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
           <input type="text" name="timeline" class="form-input" placeholder="e.g. 6 weeks, 3 months" required>
         </div>
       </div>
-      <div class="form-spacer"></div>
-      <div class="form-section-label">Milestones</div>
-      <div id="milestones">
-        <div class="milestone-item" id="m-1">
-          <div class="m-num">1</div>
-          <div class="m-fields">
-            <input type="text" name="milestone_1_desc" placeholder="What gets delivered?">
-            <input type="text" name="milestone_1_date" placeholder="Target date">
-          </div>
-        </div>
-      </div>
-      <button type="button" class="add-m-btn" onclick="addMilestone()">+ Add milestone</button>
-      <div class="form-spacer"></div>
+            <div class="form-spacer"></div>
       <div class="form-section-label">Your Background</div>
       <p class="form-hint" style="margin-bottom:20px;">This appears as a quiet line on your listing. Only signals you select are shown — nothing is marked as missing.</p>
 
@@ -366,22 +354,11 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
       </div>
 
       <div class="form-spacer"></div>
-      <div class="form-section-label">Your Pitch</div>
-      <p class="form-hint" style="margin-bottom:20px;">Three questions. Keep each answer to 2 to 3 sentences. This is what talents read first.</p>
-
-      <div class="form-group">
-        <label class="form-label">Why now? <span>*</span></label>
-        <textarea name="pitch_why_now" class="form-textarea" style="min-height:90px;" placeholder="What is happening in the world right now that makes this the right moment for your company?" oninput="updatePreview()" required></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Why you? <span>*</span></label>
-        <textarea name="pitch_why_you" class="form-textarea" style="min-height:90px;" placeholder="What about your background, experience, or perspective makes you the right person to build this?" oninput="updatePreview()" required></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">What do you need? <span>*</span></label>
-        <textarea name="pitch_what_need" class="form-textarea" style="min-height:90px;" placeholder="What specifically are you looking for from a talent, and what will they help you accomplish?" oninput="updatePreview()" required></textarea>
-      </div>
-
+<div class="form-section-label">Your Pitch (Optional)</div>
+<div class="form-group">
+  <label class="form-label">Want to say more? Add a short pitch.</label>
+  <textarea name="pitch_optional" class="form-textarea" style="min-height:100px;" placeholder="Tell talent why they should work with you. 2-3 sentences is plenty."></textarea>
+</div>
       <div class="form-spacer"></div>
       <div class="form-section-label">Listing Preview</div>
       <p class="form-hint" style="margin-bottom:20px;">This is how your project appears to talents. Updates as you fill out the form.</p>
