@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InKind</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root{--orange:#F4500A;--orange-light:#FF6B35;--orange-pale:#FFF0EA;--white:#FFFFFF;--charcoal:#111111;--slate:#444444;--muted:#999999;--border:#E8E4DF;--cream:#FAFAF8;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--charcoal);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 56px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--charcoal);letter-spacing:-0.02em;}
+.nav-logo span{color:var(--orange);}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
+.nav-links a{font-size:14px;font-weight:400;color:var(--slate);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--orange);}
+.nav-cta{background:var(--orange)!important;color:var(--white)!important;padding:10px 22px;border-radius:6px;font-weight:500!important;}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 56px;max-width:1000px;margin:0 auto;}
+.hero-label{font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:32px;}
+.hero h1{font-family:'Inter',sans-serif;font-size:clamp(52px,8vw,104px);font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:var(--charcoal);margin-bottom:36px;}
+.hero h1 span{color:var(--orange);}
+.hero-sub{font-size:20px;line-height:1.6;color:var(--slate);font-weight:300;max-width:520px;margin-bottom:48px;}
+.btn-primary{display:inline-block;background:var(--orange);color:var(--white);padding:16px 36px;border-radius:8px;font-size:15px;font-weight:500;font-family:'Inter',sans-serif;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s;}
+.btn-primary:hover{background:var(--orange-light);transform:translateY(-1px);box-shadow:0 8px 28px rgba(244,80,10,0.22);}
+.bg-cream{background:var(--cream);}
+.section{padding:100px 56px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+h2{font-family:'Inter',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--charcoal);margin-bottom:14px;}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.65;max-width:500px;font-weight:300;margin-bottom:56px;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:56px;}
+.step{background:var(--white);padding:40px 32px;}
+.step-number{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--orange);letter-spacing:0.08em;margin-bottom:20px;}
+.step-title{font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:var(--charcoal);margin-bottom:12px;letter-spacing:-0.02em;}
+.step-desc{font-size:14px;line-height:1.65;color:var(--slate);font-weight:300;}
+.explainer{background:var(--charcoal);border-radius:14px;padding:52px 60px;}
+.explainer-text{font-size:clamp(17px,2vw,22px);line-height:1.65;color:rgba(255,255,255,0.85);font-weight:300;max-width:720px;}
+.explainer-text strong{color:var(--white);font-weight:500;}
+.explainer-text .hi{color:var(--orange);font-weight:500;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.calc-box{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:36px;}
+.calc-box-title{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:28px;letter-spacing:-0.01em;}
+.input-group{margin-bottom:20px;}
+.input-label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:8px;}
+.input-wrap{position:relative;}
+.input-wrap span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--muted);pointer-events:none;}
+.input-field{width:100%;padding:13px 14px 13px 28px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;}
+.input-field:focus{border-color:var(--orange);}
+.calc-result{margin-top:28px;padding:24px;background:var(--orange-pale);border-radius:10px;border:1px solid rgba(244,80,10,0.12);display:none;}
+.result-label{font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+.result-pct{font-family:'Inter',sans-serif;font-size:44px;font-weight:800;color:var(--orange);letter-spacing:-0.03em;line-height:1;margin-bottom:6px;}
+.result-keep{font-size:14px;color:var(--slate);font-weight:300;}
+.result-keep strong{color:var(--charcoal);font-weight:500;}
+.scenario-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.scenario-row:last-child{border-bottom:none;}
+.scenario-label{color:var(--muted);font-weight:300;}
+.scenario-right{display:flex;align-items:center;gap:8px;}
+.scenario-val{font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:var(--charcoal);}
+.scenario-pct{color:var(--orange);font-size:12px;font-weight:500;}
+.pricing-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:start;}
+.pricing-card{width:340px;background:var(--charcoal);border-radius:14px;padding:44px;}
+.price-amount{font-family:'Inter',sans-serif;font-size:60px;font-weight:800;color:var(--white);letter-spacing:-0.04em;line-height:1;margin-bottom:4px;}
+.price-amount sup{font-size:24px;font-weight:600;vertical-align:super;letter-spacing:0;}
+.price-period{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:32px;font-weight:300;}
+.price-features{list-style:none;margin-bottom:36px;}
+.price-features li{font-size:14px;color:rgba(255,255,255,0.75);padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-weight:300;}
+.price-features li:last-child{border-bottom:none;}
+.price-features li::before{content:'—';color:var(--orange);flex-shrink:0;font-size:12px;margin-top:2px;}
+.price-note{font-size:12px;color:rgba(255,255,255,0.25);line-height:1.6;margin-top:16px;font-weight:300;}
+.pricing-compare{padding-top:8px;}
+.compare-title{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--charcoal);margin-bottom:24px;letter-spacing:-0.02em;}
+.compare-item{padding:20px 0;border-bottom:1px solid var(--border);}
+.compare-item:last-child{border-bottom:none;}
+.compare-item-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;font-weight:500;}
+.compare-item-amount{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.02em;color:var(--charcoal);margin-bottom:2px;}
+.compare-item-amount.orange{color:var(--orange);}
+.compare-item-desc{font-size:13px;color:var(--muted);font-weight:300;}
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.for-card{padding:32px;border:1px solid var(--border);border-radius:12px;transition:border-color 0.2s;}
+.for-card:hover{border-color:var(--orange);}
+.for-stage{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
+.for-title{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--charcoal);margin-bottom:10px;letter-spacing:-0.02em;}
+.for-desc{font-size:13px;line-height:1.65;color:var(--muted);font-weight:300;}
+.form-container{max-width:640px;}
+.form-section-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:7px;}
+.form-label span{color:var(--orange);}
+.form-input,.form-textarea{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;}
+.form-input:focus,.form-textarea:focus{border-color:var(--orange);}
+.form-textarea{resize:vertical;min-height:130px;line-height:1.6;}
+.form-hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;font-weight:300;}
+.dollar-wrap{position:relative;}
+.dollar-wrap span{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;pointer-events:none;}
+.dollar-wrap input{padding-left:26px;}
+.milestone-item{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--cream);border:1px solid var(--border);border-radius:8px;margin-bottom:10px;}
+.m-num{width:22px;height:22px;border-radius:50%;background:var(--orange);color:white;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;}
+.m-fields{flex:1;display:flex;flex-direction:column;gap:8px;}
+.m-fields input{padding:10px 13px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:'Inter',sans-serif;color:var(--charcoal);background:var(--white);outline:none;transition:border-color 0.2s;width:100%;}
+.m-fields input:focus{border-color:var(--orange);}
+.m-remove{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:2px 4px;transition:color 0.2s;flex-shrink:0;}
+.m-remove:hover{color:var(--orange);}
+.add-m-btn{width:100%;padding:12px;background:none;border:1.5px dashed var(--border);border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;transition:all 0.2s;margin-bottom:28px;}
+.add-m-btn:hover{border-color:var(--orange);color:var(--orange);}
+.privacy-row{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;background:var(--orange-pale);border-radius:8px;margin-bottom:20px;}
+.privacy-row p{font-size:13px;color:var(--slate);line-height:1.5;font-weight:300;}
+.form-spacer{height:32px;}
+.submit-area{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.submit-note{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300;}
+
+/* BADGE CHECKBOXES */
+.badge-checks{display:flex;flex-direction:column;gap:10px;margin-bottom:4px;}
+.badge-check{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;transition:border-color 0.2s,background 0.2s;}
+.badge-check:hover{border-color:var(--orange);background:var(--orange-pale);}
+.badge-check input{display:none;}
+.badge-check-box{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;background:var(--white);}
+.badge-check input:checked ~ .badge-check-box{background:var(--orange);border-color:var(--orange);}
+.badge-check input:checked ~ .badge-check-box::after{content:'✓';color:white;font-size:11px;font-weight:700;}
+.badge-check input:checked ~ .badge-check-label{color:var(--charcoal);font-weight:500;}
+.badge-check-label{font-size:14px;color:var(--slate);font-weight:300;line-height:1.4;}
+.badge-check:has(input:checked){border-color:rgba(244,80,10,0.3);background:var(--orange-pale);}
+
+/* LISTING PREVIEW */
+.listing-preview{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:28px 32px;transition:all 0.3s;}
+.lp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.lp-company{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;}
+.lp-amount{font-size:13px;font-weight:600;color:var(--orange);}
+.lp-title{font-size:18px;font-weight:700;color:var(--charcoal);letter-spacing:-0.02em;margin-bottom:10px;line-height:1.3;}
+.lp-badges{font-size:12px;color:var(--muted);font-weight:400;margin-bottom:10px;min-height:16px;letter-spacing:0.01em;}
+.lp-meta{display:flex;gap:16px;font-size:12px;color:var(--muted);font-weight:300;margin-bottom:0;}
+.lp-meta span::before{content:'·';margin-right:6px;color:var(--border);}
+.lp-meta span:first-child::before{display:none;}
+.lp-pitch-divider{height:1px;background:var(--border);margin:20px 0;}
+.lp-pitch-qa{display:flex;flex-direction:column;gap:16px;}
+.lp-qa-item{}
+.lp-qa-q{font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+.lp-qa-a{font-size:13px;color:var(--slate);line-height:1.6;font-weight:300;}
+.success-box{display:none;margin-top:24px;padding:22px 24px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;}
+.success-box.show{display:block;}
+.success-box h4{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#166534;margin-bottom:6px;}
+.success-box p{font-size:13px;color:#166534;line-height:1.5;font-weight:300;}
+footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:'Inter',sans-serif;font-weight:800;font-size:20px;color:var(--white);}
+.footer-logo span{color:var(--orange);}
+.footer-copy{font-size:13px;color:rgba(255,255,255,0.3);font-weight:300;}
+@media(max-width:860px){nav{padding:16px 24px;}.nav-links{display:none;}.hero{padding:120px 24px 72px;}.section{padding:64px 24px;}.steps{grid-template-columns:1fr;}.calc-grid{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr;}.pricing-card{width:100%;}.for-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.explainer{padding:36px 28px;}footer{padding:32px 24px;flex-direction:column;gap:12px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">In<span>Kind</span></div>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#post" class="nav-cta">Post a Project</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <p class="hero-label">InKind</p>
+  <h1>Get the skilled contractors<br><span>you need today.</span></h1>
+  <p class="hero-sub">They get paid when your company is worth something. You settle when your company raises its next round.</p>
+  <a href="#post" class="btn-primary">Post a Project</a>
+</section>
+
+<div class="bg-cream">
+<section class="section" id="how-it-works">
+  <p class="section-label">How It Works</p>
+  <h2>Three steps.</h2>
+  <p class="section-sub">Simple from start to finish.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">STEP 01</div>
+      <div class="step-title">Post your project</div>
+      <p class="step-desc">Describe what you need, set a deferred payment amount, and define milestones.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">STEP 02</div>
+      <div class="step-title">A contributor applies</div>
+      <p class="step-desc">Verified students and professionals review your project. They reach out directly. They invest in you because they believe in what you are building.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">STEP 03</div>
+      <div class="step-title">You settle at your next round</div>
+      <p class="step-desc">Their deferred payment converts at your next funding round valuation. A standardized agreement protects both parties from day one.</p>
+    </div>
+  </div>
+  <div class="explainer">
+    <p class="explainer-text">You need a contractor. InKind lets you defer that payment and get the work done today. At a <strong>$10M valuation,</strong> a $5,000 project costs you <span class="hi">0.05% of your company.</span></p>
+  </div>
+</section>
+</div>
+
+<section class="section" id="calculator">
+  <p class="section-label">Equity Calculator</p>
+  <h2>See what you're offering.</h2>
+  <p class="section-sub">Enter the deferred payment amount and your target valuation.</p>
+  <div class="calc-grid">
+    <div class="calc-box">
+      <div class="calc-box-title">Run your numbers</div>
+      <div class="input-group">
+        <label class="input-label">Deferred payment amount</label>
+        <div class="input-wrap"><span>$</span><input type="number" class="input-field" id="projectValue" placeholder="5000" oninput="calculate()"></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Target valuation at next round</label>
+        <div class="input-wrap"><span>$</span><input type="number" class="input-field" id="valuation" placeholder="10000000" oninput="calculate()"></div>
+      </div>
+      <div class="calc-result" id="calcResult">
+        <div class="result-label">Equity you're offering</div>
+        <div class="result-pct" id="equityPct">—</div>
+      </div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-box-title">What does $5,000 cost you?</div>
+      <div id="scenarioTable">
+        <div class="scenario-row"><span class="scenario-label">At $1M valuation</span><div class="scenario-right"><span class="scenario-val">$5,000</span><span class="scenario-pct">= 0.500%</span></div></div>
+        <div class="scenario-row"><span class="scenario-label">At $2M valuation</span><div class="scenario-right"><span class="scenario-val">$5,000</span><span class="scenario-pct">= 0.250%</span></div></div>
+        <div class="scenario-row"><span class="scenario-label">At $5M valuation</span><div class="scenario-right"><span class="scenario-val">$5,000</span><span class="scenario-pct">= 0.100%</span></div></div>
+        <div class="scenario-row"><span class="scenario-label">At $10M valuation</span><div class="scenario-right"><span class="scenario-val">$5,000</span><span class="scenario-pct">= 0.050%</span></div></div>
+        <div class="scenario-row"><span class="scenario-label">At $20M valuation</span><div class="scenario-right"><span class="scenario-val">$5,000</span><span class="scenario-pct">= 0.025%</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bg-cream">
+<section class="section" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2>One flat rate.</h2>
+  <p class="section-sub">$25 per month for unlimited project posts and access to our full contributor network.</p>
+  <div style="max-width:340px;">
+    <div class="pricing-card">
+      <div class="price-amount"><sup>$</sup>25</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li>Unlimited project posts</li>
+        <li>Access to verified contributors</li>
+        <li>Standardized agreement, auto-generated</li>
+        <li>Milestone tracking and verification</li>
+        <li>Direct contributor contact</li>
+      </ul>
+      <a href="#post" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
+      <p class="price-note">No contract. Cancel anytime.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section">
+  <p class="section-label">Who It's For</p>
+  <h2>Early to mid-stage founders.</h2>
+  <p class="section-sub">If you're building something real and need skilled people to help you get there.</p>
+  <div class="for-grid">
+    <div class="for-card">
+      <div class="for-stage">Pre-Seed</div>
+      <div class="for-title">Before your first round</div>
+      <p class="for-desc">You have the idea and the drive. You need help with research, strategy, or analysis — but your runway doesn't allow for contractor fees yet.</p>
+    </div>
+    <div class="for-card">
+      <div class="for-stage">Seed</div>
+      <div class="for-title">After your first raise</div>
+      <p class="for-desc">Every dollar needs to go to product and growth. Defer non-core costs without giving up meaningful equity too early.</p>
+    </div>
+    <div class="for-card">
+      <div class="for-stage">Series A</div>
+      <div class="for-title">Scaling fast</div>
+      <p class="for-desc">You need specialized help across multiple workstreams. Bring in experienced professionals who are invested in your outcome — literally.</p>
+    </div>
+  </div>
+</section>
+
+<div class="bg-cream">
+<section class="section" id="post">
+  <p class="section-label">Post a Project</p>
+  <h2>Tell us what you need.</h2>
+  <p class="section-sub">Your listing reaches verified contributors directly.</p>
+  <div class="form-container">
+    <form id="projectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-section-label">Company</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Company Name <span>*</span></label>
+          <input type="text" name="company_name" class="form-input" placeholder="Acme Inc." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company Website <span>*</span></label>
+          <input type="url" name="company_website" class="form-input" placeholder="https://acme.com" required>
+        </div>
+      </div>
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Project</div>
+      <div class="form-group">
+        <label class="form-label">Project Title <span>*</span></label>
+        <input type="text" name="project_title" class="form-input" placeholder="e.g. Market Research, Brand Identity, Financial Analysis" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Job Description <span>*</span></label>
+        <textarea name="job_description" class="form-textarea" placeholder="Describe the work, the skills needed, and what a successful outcome looks like..." required></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Deferred Payment Amount <span>*</span></label>
+          <div class="dollar-wrap"><span>$</span><input type="number" name="payment_amount" class="form-input" placeholder="5,000" required></div>
+          <p class="form-hint">The dollar value that converts at your next funding round.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Timeline <span>*</span></label>
+          <input type="text" name="timeline" class="form-input" placeholder="e.g. 6 weeks, 3 months" required>
+        </div>
+      </div>
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Milestones</div>
+      <div id="milestones">
+        <div class="milestone-item" id="m-1">
+          <div class="m-num">1</div>
+          <div class="m-fields">
+            <input type="text" name="milestone_1_desc" placeholder="What gets delivered?">
+            <input type="text" name="milestone_1_date" placeholder="Target date">
+          </div>
+        </div>
+      </div>
+      <button type="button" class="add-m-btn" onclick="addMilestone()">+ Add milestone</button>
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Your Background</div>
+      <p class="form-hint" style="margin-bottom:20px;">This appears as a quiet line on your listing. Only signals you select are shown — nothing is marked as missing.</p>
+
+      <div class="form-group">
+        <label class="form-label">Which of these apply to you?</label>
+        <div class="badge-checks">
+          <label class="badge-check"><input type="checkbox" name="badge_exit" value="exited" onchange="updatePreview()"><span class="badge-check-box"></span><span class="badge-check-label">Previous exit</span></label>
+          <label class="badge-check"><input type="checkbox" name="badge_repeat" value="repeat" onchange="updatePreview()"><span class="badge-check-box"></span><span class="badge-check-label">2nd or 3rd company</span></label>
+          <label class="badge-check"><input type="checkbox" name="badge_tier1" value="tier1" onchange="updatePreview()"><span class="badge-check-box"></span><span class="badge-check-label">Worked at a top-tier company (Google, Apple, Stripe, Brex, McKinsey, etc.)</span></label>
+          <label class="badge-check"><input type="checkbox" name="badge_raised" value="raised" onchange="updatePreview()"><span class="badge-check-box"></span><span class="badge-check-label">Previously raised institutional capital</span></label>
+          <label class="badge-check"><input type="checkbox" name="badge_seed" value="seed" onchange="updatePreview()"><span class="badge-check-box"></span><span class="badge-check-label">Current company has raised seed or pre-seed</span></label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">How long have you been working on this?</label>
+          <select name="time_building" class="form-input" onchange="updatePreview()">
+            <option value="">Select</option>
+            <option value="under3">Under 3 months</option>
+            <option value="3to6">3 to 6 months</option>
+            <option value="6to12">6 to 12 months</option>
+            <option value="over12">Over a year</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What have you built so far?</label>
+          <select name="build_stage" class="form-input" onchange="updatePreview()">
+            <option value="">Select</option>
+            <option value="idea">Idea stage</option>
+            <option value="prototype">Prototype or demo</option>
+            <option value="mvp">Live MVP</option>
+            <option value="customers">Paying customers</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Your Pitch</div>
+      <p class="form-hint" style="margin-bottom:20px;">Three questions. Keep each answer to 2 to 3 sentences. This is what contributors read first.</p>
+
+      <div class="form-group">
+        <label class="form-label">Why now? <span>*</span></label>
+        <textarea name="pitch_why_now" class="form-textarea" style="min-height:90px;" placeholder="What is happening in the world right now that makes this the right moment for your company?" oninput="updatePreview()" required></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Why you? <span>*</span></label>
+        <textarea name="pitch_why_you" class="form-textarea" style="min-height:90px;" placeholder="What about your background, experience, or perspective makes you the right person to build this?" oninput="updatePreview()" required></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">What do you need? <span>*</span></label>
+        <textarea name="pitch_what_need" class="form-textarea" style="min-height:90px;" placeholder="What specifically are you looking for from a contributor, and what will they help you accomplish?" oninput="updatePreview()" required></textarea>
+      </div>
+
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Listing Preview</div>
+      <p class="form-hint" style="margin-bottom:20px;">This is how your project appears to contributors. Updates as you fill out the form.</p>
+
+      <div class="listing-preview" id="listingPreview">
+        <div class="lp-top">
+          <div class="lp-company" id="lp-company">Your Company</div>
+          <div class="lp-amount" id="lp-amount">$—</div>
+        </div>
+        <div class="lp-title" id="lp-title">Project title</div>
+        <div class="lp-badges" id="lp-badges"></div>
+        <div class="lp-meta" id="lp-meta"><span id="lp-timeline">Timeline TBD</span><span id="lp-stage"></span></div>
+        <div class="lp-pitch-block" id="lp-pitch-block" style="display:none;">
+          <div class="lp-pitch-divider"></div>
+          <div class="lp-pitch-qa" id="lp-pitch-qa"></div>
+        </div>
+      </div>
+
+      <div class="form-spacer"></div>
+      <div class="form-section-label">Contact</div>
+      <div class="privacy-row"><p>🔒 Your contact email is kept private. Shared with a contributor only after we review their application.</p></div>
+      <div class="form-group">
+        <label class="form-label">Contact Email <span>*</span></label>
+        <input type="email" name="contact_email" class="form-input" placeholder="you@company.com" required>
+      </div>
+      <div class="submit-area">
+        <button type="submit" class="btn-primary">Submit Project</button>
+        <p class="submit-note">Your listing will be reviewed before going live. Usually within 48 hours.</p>
+      </div>
+      <div class="success-box" id="successBox">
+        <h4>Project received.</h4>
+        <p>We'll review your listing and be in touch within 48 hours.</p>
+      </div>
+    </form>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="footer-logo">In<span>Kind</span></div>
+  <p class="footer-copy">© 2026 InKind</p>
+</footer>
+
+<script>
+function calculate(){
+  const p=parseFloat(document.getElementById('projectValue').value);
+  const v=parseFloat(document.getElementById('valuation').value);
+  const r=document.getElementById('calcResult');
+  if(p&&v&&v>0){
+    const pct=(p/v)*100;
+    const fmt=n=>n<0.001?n.toFixed(4)+'%':n<0.1?n.toFixed(4)+'%':n.toFixed(3)+'%';
+    document.getElementById('equityPct').textContent=fmt(pct);
+    r.style.display='block';
+    const vals=[1e6,2e6,5e6,10e6,20e6];
+    const labels=['$1M','$2M','$5M','$10M','$20M'];
+    document.querySelectorAll('.scenario-row').forEach((row,i)=>{
+      row.querySelector('.scenario-label').textContent='At '+labels[i]+' valuation';
+      row.querySelector('.scenario-val').textContent='$'+p.toLocaleString();
+      row.querySelector('.scenario-pct').textContent='= '+fmt((p/vals[i])*100);
+    });
+  }else{r.style.display='none';}
+}
+// LIVE PREVIEW
+function updatePreview(){
+  const form = document.getElementById('projectForm');
+  const get = name => {
+    const el = form.querySelector('[name="'+name+'"]');
+    return el ? el.value.trim() : '';
+  };
+
+  // Company + title + amount + timeline
+  const company = get('company_name');
+  const title = get('project_title');
+  const amount = get('payment_amount');
+  const timeline = get('timeline');
+
+  document.getElementById('lp-company').textContent = company || 'Your Company';
+  document.getElementById('lp-title').textContent = title || 'Project title';
+  document.getElementById('lp-amount').textContent = amount ? '$' + parseFloat(amount).toLocaleString() : '$—';
+  document.getElementById('lp-timeline').textContent = timeline || 'Timeline TBD';
+
+  // Build stage
+  const stageMap = {idea:'Idea stage',prototype:'Prototype built',mvp:'Live MVP',customers:'Paying customers'};
+  const stage = get('build_stage');
+  document.getElementById('lp-stage').textContent = stageMap[stage] || '';
+
+  // Badges
+  const badgeMap = {
+    exited: 'Previous exit',
+    repeat: '2nd company',
+    tier1: 'Top-tier background',
+    raised: 'Previously raised',
+    seed: 'Seed raised'
+  };
+  const timeMap = {under3:'Building < 3 months',  '3to6':'Building 3–6 months', '6to12':'Building 6–12 months', over12:'Building 1+ year'};
+  const checked = [...form.querySelectorAll('[name^="badge_"]:checked')].map(el => badgeMap[el.value]);
+  const time = get('time_building');
+  if(time && timeMap[time]) checked.unshift(timeMap[time]);
+  const badgeEl = document.getElementById('lp-badges');
+  badgeEl.textContent = checked.length ? checked.join(' · ') : '';
+
+  // Pitch Q&A
+  const whyNow = get('pitch_why_now');
+  const whyYou = get('pitch_why_you');
+  const whatNeed = get('pitch_what_need');
+  const hasPitch = whyNow || whyYou || whatNeed;
+  const pitchBlock = document.getElementById('lp-pitch-block');
+  const pitchQA = document.getElementById('lp-pitch-qa');
+  if(hasPitch){
+    pitchBlock.style.display = 'block';
+    let html = '';
+    if(whyNow) html += '<div class="lp-qa-item"><div class="lp-qa-q">Why now</div><div class="lp-qa-a">'+whyNow+'</div></div>';
+    if(whyYou) html += '<div class="lp-qa-item"><div class="lp-qa-q">Why you</div><div class="lp-qa-a">'+whyYou+'</div></div>';
+    if(whatNeed) html += '<div class="lp-qa-item"><div class="lp-qa-q">What you need</div><div class="lp-qa-a">'+whatNeed+'</div></div>';
+    pitchQA.innerHTML = html;
+  } else {
+    pitchBlock.style.display = 'none';
+  }
+}
+
+// Wire up text inputs to preview
+['company_name','project_title','payment_amount','timeline'].forEach(name => {
+  const el = document.querySelector('[name="'+name+'"]');
+  if(el) el.addEventListener('input', updatePreview);
+});
+function addMilestone(){
+  mCount++;
+  const c=document.getElementById('milestones');
+  const d=document.createElement('div');
+  d.className='milestone-item';d.id='m-'+mCount;
+  d.innerHTML='<div class="m-num">'+mCount+'</div><div class="m-fields"><input type="text" name="milestone_'+mCount+'_desc" placeholder="What gets delivered?"><input type="text" name="milestone_'+mCount+'_date" placeholder="Target date"></div><button type="button" class="m-remove" onclick="this.closest(\'.milestone-item\').remove()">×</button>';
+  c.appendChild(d);
+}
+document.getElementById('projectForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}})
+  .then(()=>{document.getElementById('successBox').classList.add('show');this.reset();})
+  .catch(()=>{document.getElementById('successBox').classList.add('show');});
+});
+</script>
+</body>
+</html>
