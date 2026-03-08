@@ -480,7 +480,7 @@ function updatePreview(){
 }
 
 // Wire up text inputs to preview
-['company_name','project_title','payment_amount','timeline'].forEach(name => {
+['company_name','project_title','job_description','payment_amount','timeline'].forEach(name => {
   const el = document.querySelector('[name="'+name+'"]');
   if(el) el.addEventListener('input', updatePreview);
 });
