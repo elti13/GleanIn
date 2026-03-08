@@ -16,7 +16,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links a{font-size:14px;font-weight:400;color:var(--slate);text-decoration:none;transition:color 0.2s;}
 .nav-links a:hover{color:var(--orange);}
 .nav-cta{background:var(--orange)!important;color:var(--white)!important;padding:10px 22px;border-radius:6px;font-weight:500!important;}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 56px;max-width:1000px;margin:0 auto;}
+.hero{min-height:30vh;display:flex;flex-direction:column;justify-content:center;padding:0 56px;max-width:1000px;margin:0 auto;}
 .hero-label{font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:32px;}
 .hero h1{font-family:'Inter',sans-serif;font-size:clamp(52px,8vw,104px);font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:var(--charcoal);margin-bottom:36px;}
 .hero h1 span{color:var(--orange);}
@@ -179,7 +179,7 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
     </div>
     <div class="step">
       <div class="step-number">STEP 02</div>
-      <div class="step-title">A contributor applies</div>
+      <div class="step-title">A talent applies</div>
       <p class="step-desc">Verified students and professionals review your project. They reach out directly. They invest in you because they believe in what you are building.</p>
     </div>
     <div class="step">
@@ -231,17 +231,17 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
 <section class="section" id="pricing">
   <p class="section-label">Pricing</p>
   <h2>One flat rate.</h2>
-  <p class="section-sub">$25 per month for unlimited project posts and access to our full contributor network.</p>
+  <p class="section-sub">$25 per month for unlimited project posts and access to our full talent network.</p>
   <div style="max-width:340px;">
     <div class="pricing-card">
       <div class="price-amount"><sup>$</sup>25</div>
       <div class="price-period">per month</div>
       <ul class="price-features">
         <li>Unlimited project posts</li>
-        <li>Access to verified contributors</li>
+        <li>Access to verified talents</li>
         <li>Standardized agreement, auto-generated</li>
         <li>Milestone tracking and verification</li>
-        <li>Direct contributor contact</li>
+        <li>Direct talent contact</li>
       </ul>
       <a href="#post" class="btn-primary" style="width:100%;text-align:center;display:block;">Get Started</a>
       <p class="price-note">No contract. Cancel anytime.</p>
@@ -277,7 +277,7 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
 <section class="section" id="post">
   <p class="section-label">Post a Project</p>
   <h2>Tell us what you need.</h2>
-  <p class="section-sub">Your listing reaches verified contributors directly.</p>
+  <p class="section-sub">Your listing reaches verified talents directly.</p>
   <div class="form-container">
     <form id="projectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <div class="form-section-label">Company</div>
@@ -364,7 +364,7 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
 
       <div class="form-spacer"></div>
       <div class="form-section-label">Your Pitch</div>
-      <p class="form-hint" style="margin-bottom:20px;">Three questions. Keep each answer to 2 to 3 sentences. This is what contributors read first.</p>
+      <p class="form-hint" style="margin-bottom:20px;">Three questions. Keep each answer to 2 to 3 sentences. This is what talents read first.</p>
 
       <div class="form-group">
         <label class="form-label">Why now? <span>*</span></label>
@@ -376,12 +376,12 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
       </div>
       <div class="form-group">
         <label class="form-label">What do you need? <span>*</span></label>
-        <textarea name="pitch_what_need" class="form-textarea" style="min-height:90px;" placeholder="What specifically are you looking for from a contributor, and what will they help you accomplish?" oninput="updatePreview()" required></textarea>
+        <textarea name="pitch_what_need" class="form-textarea" style="min-height:90px;" placeholder="What specifically are you looking for from a talent, and what will they help you accomplish?" oninput="updatePreview()" required></textarea>
       </div>
 
       <div class="form-spacer"></div>
       <div class="form-section-label">Listing Preview</div>
-      <p class="form-hint" style="margin-bottom:20px;">This is how your project appears to contributors. Updates as you fill out the form.</p>
+      <p class="form-hint" style="margin-bottom:20px;">This is how your project appears to talents. Updates as you fill out the form.</p>
 
       <div class="listing-preview" id="listingPreview">
         <div class="lp-top">
@@ -399,7 +399,7 @@ footer{background:var(--charcoal);padding:40px 56px;display:flex;align-items:cen
 
       <div class="form-spacer"></div>
       <div class="form-section-label">Contact</div>
-      <div class="privacy-row"><p>🔒 Your contact email is kept private. Shared with a contributor only after we review their application.</p></div>
+      <div class="privacy-row"><p>🔒 Your contact email is kept private. Only shared with vetted talent after we review their application.</p></div>
       <div class="form-group">
         <label class="form-label">Contact Email <span>*</span></label>
         <input type="email" name="contact_email" class="form-input" placeholder="you@company.com" required>
